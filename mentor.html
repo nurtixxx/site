@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Чат-бот «Ментор стартапов»: подсказки по валидации идеи, MVP и монетизации." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>Ментор стартапов — StartupEval</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">AI-помощник</span>
+        <h1 class="section-title">Ментор стартапов</h1>
+        <p class="section-subtitle">
+          Задайте вопрос о валидации идеи, MVP, монетизации или первых клиентах.
+          Ментор отвечает кратко и по делу, но не заменяет эксперта и не обещает успех.
+        </p>
+
+        <div class="chat-layout">
+          <!-- ================= Чат ================= -->
+          <div class="card chat-card">
+            <div class="chat-head">
+              <h2>Диалог с ментором</h2>
+              <button class="btn btn-ghost btn-sm" id="clear-chat" type="button">Очистить</button>
+            </div>
+
+            <div
+              class="chat-log"
+              id="chat-log"
+              role="log"
+              aria-live="polite"
+              aria-label="История диалога"
+            ></div>
+
+            <form class="chat-form" id="chat-form">
+              <label class="sr-only" for="chat-input">Сообщение ментору</label>
+              <textarea
+                class="textarea"
+                id="chat-input"
+                rows="1"
+                maxlength="1000"
+                placeholder="Например: как проверить спрос на B2B-сервис до разработки?"
+                autocomplete="off"
+              ></textarea>
+              <button class="btn btn-primary" id="send-btn" type="submit">Отправить</button>
+            </form>
+          </div>
+
+          <!-- ================= Подсказки ================= -->
+          <aside class="card" style="margin-top: 0;">
+            <h3 style="font-size: 1rem;">Быстрые вопросы</h3>
+            <div class="quick-list">
+              <button class="btn btn-secondary quick-btn" type="button" data-question="Как проверить спрос на мою идею до разработки MVP?">
+                Как проверить спрос до MVP?
+              </button>
+              <button class="btn btn-secondary quick-btn" type="button" data-question="Какую модель монетизации выбрать для B2B SaaS в Казахстане?">
+                Какую монетизацию выбрать?
+              </button>
+              <button class="btn btn-secondary quick-btn" type="button" data-question="Что обязательно должно войти в MVP за первые 6 недель?">
+                Что включить в MVP?
+              </button>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border); margin: 20px 0;" />
+
+            <p class="small muted" style="margin-bottom: 8px;">
+              Enter — отправить, Shift+Enter — перенос строки. История хранится только
+              в этой вкладке и не сохраняется на сервере.
+            </p>
+            <p class="small muted" style="margin: 0;">
+              Ментор может ошибаться. Проверяйте рекомендации на реальных клиентах.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/mentor.js"></script>
+</body>
+</html>

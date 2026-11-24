@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Методика оценки стартап-идей и проверка достоверности AI-оценок на исторических кейсах." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>Аналитика — StartupEval</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Исследовательская часть</span>
+        <h1 class="section-title">Аналитика и проверка методики</h1>
+        <p class="section-subtitle">
+          Как устроена оценка, насколько стабильно модель выставляет баллы и где она ошибается.
+          Ниже — описание критериев, таблица проверки на реальных кейсах и графики.
+        </p>
+
+        <!-- ================= Методика ================= -->
+        <h2 class="section-title" style="font-size: 1.35rem;">Методика оценки</h2>
+        <div class="grid grid-2">
+          <article class="placeholder-block">
+            <h3>1. Проблема и рынок — вес 25 %</h3>
+            <p>
+              Насколько проблема реальна и болезненна, кто её испытывает, хватает ли размера рынка.
+              Шкала 1–10: 1–3 — проблема размыта, 4–6 — есть, но рынок неясен, 7–10 — острая боль
+              и понятный платящий сегмент.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>2. Уникальность — вес 20 %</h3>
+            <p>
+              Отличие от существующих решений и сложность копирования. Шкала 1–10: 1–3 — полный
+              аналог, 4–6 — улучшение без барьера, 7–10 — защищаемое преимущество.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>3. Реализуемость — вес 15 %</h3>
+            <p>
+              Можно ли собрать MVP доступными технологиями и силами небольшой команды.
+              Шкала 1–10: 1–3 — нужны редкие ресурсы, 4–6 — реалистично, но долго,
+              7–10 — запуск за месяцы без тяжёлой инфраструктуры.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>4. Монетизация — вес 20 %</h3>
+            <p>
+              Кто платит, по какой модели и сходится ли юнит-экономика.
+              Шкала 1–10: 1–3 — модель отсутствует, 4–6 — есть гипотеза,
+              7–10 — понятный платящий клиент и проверенная цена.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>5. Масштабируемость — вес 10 %</h3>
+            <p>
+              Растёт ли продукт без пропорционального роста затрат и можно ли выйти в новые регионы.
+              Шкала 1–10: 1–3 — ручной труд на каждого клиента, 4–6 — частичная автоматизация,
+              7–10 — тиражирование почти без роста издержек.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>6. Риски — вес 10 %</h3>
+            <p>
+              Регуляторные, технологические и рыночные угрозы. Шкала 1–10, где
+              <strong>10 — минимальный риск</strong>, 1 — критический. Взвешенная сумма даёт итог
+              по шкале 10 с одним знаком после запятой.
+            </p>
+          </article>
+        </div>
+
+        <div class="banner banner-info" style="margin-top: 20px;">
+          Формула итога: 0.25 × рынок + 0.20 × уникальность + 0.15 × реализуемость +
+          0.20 × монетизация + 0.10 × масштабируемость + 0.10 × риски.
+          Считается в браузере, а не моделью, — так результат нельзя «подкрутить» промптом.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Проверка достоверности ================= -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title" style="font-size: 1.35rem;">Проверка достоверности</h2>
+        <p class="section-subtitle">
+          Мы прогнали известные кейсы через модель по три раза и сравнили балл с реальным исходом.
+          Красным выделены строки, где высокая оценка ИИ противоречит провалу (или наоборот).
+        </p>
+
+        <div class="toolbar">
+          <div class="field">
+            <label for="search-input">Поиск по названию</label>
+            <input class="input" id="search-input" type="search" placeholder="Например: Quibi" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="outcome-filter">Реальный исход</label>
+            <select class="select" id="outcome-filter">
+              <option value="ALL">Все исходы</option>
+              <option value="успех">Успех</option>
+              <option value="провал">Провал</option>
+              <option value="неоднозначно">Неоднозначно</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="sector-filter">Сектор</label>
+            <select class="select" id="sector-filter">
+              <option value="ALL">Все секторы</option>
+            </select>
+          </div>
+
+          <button class="btn btn-secondary" id="reset-filters" type="button">Сбросить</button>
+        </div>
+
+        <div class="table-wrap">
+          <table id="validation-table">
+            <caption class="sr-only">
+              Сравнение AI-оценки стартап-идей с реальным исходом
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" class="sortable" data-sort="idea" aria-sort="none">
+                  Идея <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="sector" aria-sort="none">
+                  Сектор <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="real_outcome" aria-sort="none">
+                  Реальный исход <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="ai_score" aria-sort="none">
+                  Оценка ИИ <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="run1" aria-sort="none">
+                  Запуск 1 <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="run2" aria-sort="none">
+                  Запуск 2 <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="run3" aria-sort="none">
+                  Запуск 3 <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col" class="sortable" data-sort="spread" aria-sort="none">
+                  Разброс <span class="sort-ind" aria-hidden="true">↕</span>
+                </th>
+                <th scope="col">Комментарий</th>
+              </tr>
+            </thead>
+            <tbody id="validation-body">
+              <tr>
+                <td colspan="9">Загрузка данных…</td>
+              </tr>
+            </tbody>
+            <tfoot id="validation-foot"></tfoot>
+          </table>
+        </div>
+
+        <div class="legend">
+          <span><span class="legend-swatch" style="background: var(--danger);"></span>Оценка ИИ противоречит реальному исходу</span>
+          <span>Разброс = max(run1, run2, run3) − min(run1, run2, run3)</span>
+        </div>
+
+        <div class="grid grid-2" style="margin-top: 28px;">
+          <div class="card" style="margin-top: 0;">
+            <h3 style="font-size: 1rem;">Оценка ИИ по идеям</h3>
+            <div style="position: relative; height: 320px;">
+              <canvas id="ai-score-chart" role="img" aria-label="Столбчатая диаграмма оценок ИИ по идеям"></canvas>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 0;">
+            <h3 style="font-size: 1rem;">Разброс между запусками</h3>
+            <div style="position: relative; height: 320px;">
+              <canvas id="spread-chart" role="img" aria-label="Столбчатая диаграмма разброса оценок между запусками"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Выводы ================= -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title" style="font-size: 1.35rem;">Выводы и ограничения</h2>
+
+        <div class="grid grid-2">
+          <article class="placeholder-block">
+            <h3>Стабильность оценки</h3>
+            <p>
+              TODO: описать, насколько близки баллы между тремя запусками, какие критерии дают
+              наибольший разброс и что это значит для практического применения.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>Где модель ошибается</h3>
+            <p>
+              TODO: разобрать кейсы с расхождением (например, Quibi и Theranos) и объяснить,
+              почему ИИ переоценивает идеи с сильным питчем и слабой проверяемой основой.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>Ограничения метода</h3>
+            <p>
+              TODO: перечислить ограничения — размер выборки, ретроспективный характер данных,
+              отсутствие доступа к реальным метрикам, зависимость от качества описания идеи.
+            </p>
+          </article>
+
+          <article class="placeholder-block">
+            <h3>Этические аспекты</h3>
+            <p>
+              TODO: описать, почему оценка не заменяет экспертов и Due Diligence, как избегать
+              дискриминационных выводов и что делать с персональными данными пользователей.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/analytics.js"></script>
+</body>
+</html>

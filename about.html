@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="О проекте StartupEval: цель, технологии, авторы, ограничения и этика применения AI-оценки." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>О проекте — StartupEval</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Учебный проект</span>
+        <h1 class="section-title">О проекте StartupEval</h1>
+        <p class="section-subtitle">
+          «Интеллектуальный сайт для оценки перспективных стартап-идей» — проект по дисциплине
+          «Информационно-коммуникационные технологии», Университет Нархоз.
+        </p>
+
+        <div class="grid grid-2">
+          <article class="card" style="margin-top: 0;">
+            <h2 style="font-size: 1.15rem;">Цель проекта</h2>
+            <p class="muted">
+              Начинающие предприниматели и студенческие команды часто переоценивают свои идеи:
+              вкладывают месяцы в продукт, который никто не ждёт. StartupEval даёт быстрый
+              структурированный взгляд со стороны — по шести критериям и с понятными
+              рекомендациями, что проверить в первую очередь.
+            </p>
+            <p class="muted" style="margin-bottom: 0;">
+              Задача проекта — не вынести окончательный вердикт, а помочь задать правильные
+              вопросы до запуска MVP.
+            </p>
+          </article>
+
+          <article class="card" style="margin-top: 0;">
+            <h2 style="font-size: 1.15rem;">Технологии</h2>
+            <ul class="plain">
+              <li><strong>AI-модель:</strong> Google Gemini через серверную функцию с системным промптом и строгим JSON-контрактом.</li>
+              <li><strong>Хостинг:</strong> Vercel — статика и serverless-функции в одном проекте.</li>
+              <li><strong>Визуализация:</strong> Chart.js 4.4.1 (радарная и столбчатые диаграммы).</li>
+              <li><strong>Фронтенд:</strong> семантический HTML5, CSS-переменные, vanilla JS без сборщиков.</li>
+              <li><strong>Данные:</strong> JSON-файлы в репозитории, без базы данных и без хранения персональных данных.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size: 1.15rem;">Как устроена оценка</h2>
+          <ol class="plain">
+            <li>Пользователь заполняет форму: название, описание, аудитория, монетизация, регион.</li>
+            <li>Браузер отправляет POST-запрос на <span class="mono">/api/evaluate</span>.</li>
+            <li>Серверная функция подставляет системный промпт и вызывает модель с требованием вернуть JSON.</li>
+            <li>Ответ проверяется по структуре: шесть критериев, балл — целое число от 1 до 10.</li>
+            <li>Итоговый балл считает браузер по фиксированным весам — модель не может его «подкрутить».</li>
+            <li>Если API недоступен, сайт показывает сохранённый демо-пример и честно об этом сообщает.</li>
+          </ol>
+        </div>
+
+        <div class="grid grid-2">
+          <article class="card" style="margin-top: 20px;">
+            <h2 style="font-size: 1.15rem;">Авторы</h2>
+            <p class="muted" style="margin-bottom: 4px;">Фамилия Имя, Фамилия Имя</p>
+            <p class="muted">Группа: [ОП] · ИКТ · Школа цифровых технологий, Университет Нархоз</p>
+            <p class="muted" style="margin-bottom: 0;">2026 учебный год.</p>
+          </article>
+
+          <article class="card" style="margin-top: 20px;">
+            <h2 style="font-size: 1.15rem;">Источники и материалы</h2>
+            <ul class="plain">
+              <li><a href="https://ai.google.dev/gemini-api/docs" target="_blank" rel="noopener noreferrer">Документация Gemini API</a></li>
+              <li><a href="https://vercel.com/docs/functions" target="_blank" rel="noopener noreferrer">Vercel Functions</a></li>
+              <li><a href="https://www.chartjs.org/docs/latest/" target="_blank" rel="noopener noreferrer">Chart.js — документация</a></li>
+              <li><a href="https://developer.mozilla.org/ru/docs/Web" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size: 1.15rem;">Ограничения и этика</h2>
+          <ul class="plain">
+            <li><strong>ИИ может ошибаться.</strong> Модель не проверяет факты и может уверенно выдавать неверные выводы.</li>
+            <li><strong>Оценка не заменяет экспертов.</strong> Это инструмент первичного скрининга, а не инвестиционное решение и не Due Diligence.</li>
+            <li><strong>Данные пользователя не сохраняются.</strong> Описание идеи уходит в API модели для генерации ответа и не записывается в базу.</li>
+            <li><strong>Нет гарантий успеха.</strong> Высокий балл не означает, что проект заработает; низкий — что он обречён.</li>
+            <li><strong>Возможны искажения.</strong> Оценка зависит от полноты описания и может быть предвзятой к знакомым модели формулировкам.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2 style="font-size: 1.15rem;">Список литературы</h2>
+          <div class="placeholder-block">
+            <p>
+              TODO: добавить оформленный список литературы по ГОСТ (не менее 5–7 источников):
+              научные статьи о венчурном скрининге, книги по Customer Development и Lean Startup,
+              документация использованных технологий, отчёты о стартап-экосистеме Казахстана.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+</body>
+</html>

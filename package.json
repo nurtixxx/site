@@ -1,0 +1,14 @@
+{
+  "name": "startup-eval",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Учебный статический сайт для AI-оценки стартап-идей (HTML/CSS/vanilla JS + Vercel Functions)",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  }
+}

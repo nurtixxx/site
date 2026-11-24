@@ -1,11 +1,181 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>site</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StartupEval — учебный AI-сервис для оценки перспективных стартап-идей по шести критериям." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>StartupEval — интеллектуальная оценка стартап-идей</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <h1>sperma</h1>
-    <p>sperma2asdhasjdhkasd</p>
+  <main id="main">
+    <!-- ================= Hero ================= -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="eyebrow">AI-скрининг стартап-идей</span>
+          <h1>Оцените стартап-идею до того, как вложите в неё время</h1>
+          <p class="hero-lead">
+            StartupEval разбирает идею по шести критериям — от проблемы и рынка до рисков —
+            и показывает, где проект силён, а где нужна доработка. Оценка занимает меньше минуты.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="evaluate.html">Оценить идею</a>
+            <a class="btn btn-secondary" href="analytics.html">Посмотреть методику</a>
+          </div>
+        </div>
+
+        <!-- Заглушка: положите AI-изображение в assets/images/hero.jpg -->
+        <figure class="hero-media media-placeholder" style="margin: 0;">
+          <img
+            src="assets/images/hero.jpg"
+            alt="Иллюстрация: искусственный интеллект анализирует бизнес-идею"
+            data-fallback
+          />
+          <figcaption class="media-note">
+            Заглушка: здесь будет AI-изображение<br />
+            <span class="mono">assets/images/hero.jpg</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= Как это работает ================= -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Как это работает</h2>
+        <p class="section-subtitle">
+          Три шага: описываете идею, модель разбирает её по методике, вы получаете балл и план доработки.
+        </p>
+
+        <div class="grid grid-3">
+          <article class="step">
+            <span class="step-num" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9" /><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            </span>
+            <h3>1. Опишите идею</h3>
+            <p>Название, суть проекта, аудитория, модель монетизации и регион запуска.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-num" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v3" /><path d="M12 18v3" /><path d="M3 12h3" /><path d="M18 12h3" />
+                <circle cx="12" cy="12" r="4" />
+              </svg>
+            </span>
+            <h3>2. Получите разбор</h3>
+            <p>Шесть критериев с баллами и комментариями, сильные и слабые стороны, похожие продукты.</p>
+          </article>
+
+          <article class="step">
+            <span class="step-num" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18" /><path d="M7 15l4-4 3 3 5-6" />
+              </svg>
+            </span>
+            <h3>3. Улучшите проект</h3>
+            <p>Рекомендации показывают, какие гипотезы проверить до запуска MVP.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Видео ================= -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title">Питч проекта</h2>
+        <p class="section-subtitle">
+          Короткое видео о том, какую задачу решает StartupEval и как устроена оценка.
+        </p>
+
+        <div class="grid grid-2" style="align-items: start;">
+          <div>
+            <!-- Заглушка: положите видео в assets/video/pitch.mp4, постер в assets/images/pitch-poster.jpg -->
+            <div class="video-wrap">
+              <video controls preload="none" poster="assets/images/pitch-poster.jpg" aria-describedby="video-caption">
+                <source src="assets/video/pitch.mp4" type="video/mp4" />
+                Ваш браузер не поддерживает видео. Скачайте файл
+                <a href="assets/video/pitch.mp4">assets/video/pitch.mp4</a>.
+              </video>
+              <p class="video-note">
+                Заглушка: здесь будет видео-питч<br />
+                <span class="mono">assets/video/pitch.mp4</span>
+              </p>
+            </div>
+            <p class="caption" id="video-caption">
+              Заглушка: AI-аватар с питчем проекта. Файл пока не добавлен
+              (<span class="mono">assets/video/pitch.mp4</span>).
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Что вы увидите в разборе</h3>
+            <ul class="plain">
+              <li>Итоговый балл по шкале 10 с цветовой индикацией.</li>
+              <li>Балл и комментарий по каждому из шести критериев.</li>
+              <li>Радарную диаграмму сильных и слабых сторон.</li>
+              <li>Список похожих существующих продуктов.</li>
+              <li>Рекомендации, что проверить в первую очередь.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Критерии ================= -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <h2 class="section-title">Критерии оценки</h2>
+        <p class="section-subtitle">
+          Итог считается по взвешенной сумме: рынок 25 %, уникальность 20 %, реализуемость 15 %,
+          монетизация 20 %, масштабируемость 10 %, риски 10 %.
+        </p>
+
+        <div class="criteria-grid">
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Проблема и рынок</h3>
+            <p>Насколько боль реальна, кто её испытывает и хватит ли масштаба рынка.</p>
+          </article>
+
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Уникальность</h3>
+            <p>Чем решение отличается от существующих и насколько его сложно скопировать.</p>
+          </article>
+
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Реализуемость</h3>
+            <p>Можно ли собрать MVP доступными технологиями и силами небольшой команды.</p>
+          </article>
+
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Монетизация</h3>
+            <p>Кто платит, по какой модели и сходится ли юнит-экономика.</p>
+          </article>
+
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Масштабируемость</h3>
+            <p>Растёт ли продукт без пропорционального роста затрат и можно ли выйти в другие регионы.</p>
+          </article>
+
+          <article class="criterion">
+            <div class="criterion-thumb" aria-hidden="true">AI-иллюстрация · заглушка</div>
+            <h3>Риски</h3>
+            <p>Регуляторные, технологические и рыночные угрозы. Высокий балл = низкий риск.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
 </body>
 </html>

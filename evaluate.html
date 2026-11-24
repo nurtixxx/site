@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Опишите стартап-идею и получите оценку по шести критериям с рекомендациями." />
+  <meta name="theme-color" content="#4f46e5" />
+  <title>Оценка идеи — StartupEval</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Chart.js: версия зафиксирована, чтобы вёрстка не «поехала» после обновлений -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+</head>
+<body>
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <span class="eyebrow">Шаг 1 из 2</span>
+        <h1 class="section-title">Оценка стартап-идеи</h1>
+        <p class="section-subtitle">
+          Опишите идею как можно конкретнее: какую проблему решаете, для кого, как будете
+          зарабатывать. Чем больше деталей, тем полезнее разбор.
+        </p>
+
+        <!-- ================= Форма ================= -->
+        <div class="card">
+          <form id="evaluate-form" novalidate>
+            <div class="form-grid">
+              <div class="field field-full">
+                <label for="idea-title">Название идеи или проекта</label>
+                <input
+                  class="input"
+                  id="idea-title"
+                  name="title"
+                  type="text"
+                  maxlength="120"
+                  placeholder="Например: CoffeeForecast"
+                  autocomplete="off"
+                />
+                <span class="hint">Необязательно, но с названием разбор читать удобнее.</span>
+              </div>
+
+              <div class="field field-full">
+                <label for="idea-description">Описание идеи <span aria-hidden="true">*</span></label>
+                <textarea
+                  class="textarea"
+                  id="idea-description"
+                  name="description"
+                  required
+                  minlength="20"
+                  maxlength="2000"
+                  aria-describedby="description-help description-error"
+                  placeholder="Проблема, решение, для кого, почему сейчас, как это работает. Например: B2B-сервис для кофеен Казахстана, который прогнозирует закупку молока и зерна по погоде и истории чеков. Подписка 25 000 ₸ в месяц, MVP на базе кассовых API за 2 месяца."
+                ></textarea>
+                <div class="counter-row" id="description-help">
+                  <span>От 20 до 2000 символов.</span>
+                  <span id="description-counter" aria-live="polite">0 / 2000</span>
+                </div>
+                <p class="hint" id="description-error" role="alert" hidden></p>
+              </div>
+
+              <div class="field">
+                <label for="idea-audience">Целевая аудитория</label>
+                <input
+                  class="input"
+                  id="idea-audience"
+                  name="audience"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Например: владельцы небольших кофеен, 1–5 точек"
+                />
+              </div>
+
+              <div class="field">
+                <label for="idea-monetization">Монетизация</label>
+                <input
+                  class="input"
+                  id="idea-monetization"
+                  name="monetization"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Например: подписка за филиал"
+                />
+              </div>
+
+              <div class="field">
+                <label for="idea-region">Страна / регион запуска</label>
+                <input
+                  class="input"
+                  id="idea-region"
+                  name="region"
+                  type="text"
+                  maxlength="300"
+                  placeholder="Например: Казахстан, Алматы"
+                />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" id="submit-btn" type="submit">Оценить</button>
+              <button class="btn btn-secondary" id="demo-btn" type="button">Попробовать пример</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Сообщения об ошибках и статусе -->
+        <div id="form-error" class="banner banner-error" role="alert" hidden></div>
+        <div id="demo-banner" class="banner banner-warn" hidden>
+          Демо-режим: показан сохранённый пример оценки.
+        </div>
+
+        <!-- ================= Результат ================= -->
+        <section id="result" aria-live="polite" hidden>
+          <div class="card" style="margin-top: 24px;">
+            <div class="result-head">
+              <div>
+                <span class="eyebrow" id="result-label">Результат оценки</span>
+                <h2 id="result-title" style="margin-bottom: 8px;">—</h2>
+                <p class="muted" id="result-subtitle" style="margin: 0;"></p>
+              </div>
+              <div class="score-big" id="score-badge">
+                <span class="score-value" id="score-value">0.0</span>
+                <span class="score-scale">из 10</span>
+              </div>
+            </div>
+
+            <div class="criteria-result" id="criteria-cards"></div>
+
+            <div class="verdict" id="verdict-block">
+              <h4>Вердикт</h4>
+              <p id="verdict-text"></p>
+            </div>
+
+            <div class="grid grid-2" style="margin-top: 24px;">
+              <div>
+                <div class="result-lists" style="grid-template-columns: 1fr; margin-top: 0;">
+                  <div class="result-list" id="strengths-block">
+                    <h4>Сильные стороны</h4>
+                    <ul id="strengths-list"></ul>
+                  </div>
+                  <div class="result-list" id="weaknesses-block">
+                    <h4>Слабые стороны</h4>
+                    <ul id="weaknesses-list"></ul>
+                  </div>
+                  <div class="result-list" id="recommendations-block">
+                    <h4>Рекомендации</h4>
+                    <ul id="recommendations-list"></ul>
+                  </div>
+                  <div class="result-list" id="similar-block" hidden>
+                    <h4>Похожие существующие продукты</h4>
+                    <ul id="similar-list"></ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card" style="margin-top: 0;">
+                <h3 style="font-size: 1rem;">Профиль по критериям</h3>
+                <div class="chart-box">
+                  <canvas id="radar-chart" role="img" aria-label="Радарная диаграмма оценок по шести критериям"></canvas>
+                </div>
+                <p class="caption" style="margin-bottom: 0;">
+                  Каждый луч — один критерий, шкала от 0 до 10.
+                </p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" id="copy-btn" type="button">Скопировать результат</button>
+              <button class="btn btn-secondary" id="again-btn" type="button">Оценить другую идею</button>
+              <span class="hint" id="copy-status" role="status"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/common.js"></script>
+  <script src="js/evaluate.js"></script>
+</body>
+</html>
